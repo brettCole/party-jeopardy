@@ -20,5 +20,12 @@ module.exports = {
       }
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
+  daisyui: {
+    themes: [
+      "synthwave",
+      "aqua"
+    ],
+    darkTheme: "synthwave"
+  },
 }
