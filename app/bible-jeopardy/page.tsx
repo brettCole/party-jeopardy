@@ -10,10 +10,10 @@ export default async function BibleJeopardy() {
   
   return (
     <>
-      <header className="grid grid-cols-6 gap-4">
+      <header>
         <CategoryTitle categoryRows={rows} />
       </header>
-      <main className="flex justify-center min-h-screen p-24">
+      <main className="flex justify-center min-h-screen pt-4">
         <CategoryClue clueRows={clues.rows} />
       </main>
     </>
