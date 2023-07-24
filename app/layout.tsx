@@ -1,7 +1,6 @@
 import './globals.css'
-import { Inter } from 'next/font/google'
+import { Inter, Michroma } from 'next/font/google'
 import Gyparody from 'next/font/local'
-import { Michroma } from 'next/font/google'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -11,7 +10,8 @@ const gyparody = Gyparody({
 });
 
 const michroma = Michroma({
-  weight: "400"
+  weight: "400",
+  subsets: ['latin']
 });
 
 export const metadata = {
