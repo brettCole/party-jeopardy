@@ -24,7 +24,7 @@ export default function JeopardySelect() {
           <div className="ml-2.5 p-2 border border-amber-600">
             <div 
               className="tooltip"
-              data-tip="Play 3 rounds of Bible based Jeopardy questions. Find out who the winner is each game, but will not track number of wins."
+              data-tip="Play 3 rounds including Bible Jeopardy, Double, and Final Bible Jeopardy. Find out who the winner is each game."
             >
               <button className='block border border-jeopardyYellow p-4 font-gyparody text-5xl text-jeopardyYellow'>
                 <Link href='/bible-jeopardy'>

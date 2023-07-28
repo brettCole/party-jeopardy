@@ -2,6 +2,7 @@ import React from 'react';
 import { sql } from '@vercel/postgres';
 import  CategoryTitle, { ICategoryRow } from "../components/CategoryTitle";
 import CategoryClue, { Clue } from '../components/CategoryClue';
+import WelcomeHelp from "@/app/components/WelcomeHelp";
 
 export default async function BibleJeopardy() {
 
@@ -10,6 +11,7 @@ export default async function BibleJeopardy() {
   
   return (
     <>
+        <WelcomeHelp />
       <header>
         <CategoryTitle categoryRows={rows} />
       </header>

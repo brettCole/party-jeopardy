@@ -23,7 +23,7 @@ const CategoryClue: FC<IClueProps> = ({ clueRows }) => {
 
   useEffect(() => {
     setClues(clueRows);
-  }, []);
+  }, [clueRows]);
 
   const handleModalState = () => {
     setDisplayModal(!displayModal);
