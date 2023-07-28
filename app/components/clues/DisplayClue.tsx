@@ -28,7 +28,7 @@ const DisplayClue: FC<IDisplayClueProps> = ({ clue: { id, description, answer, p
   if (id) {
     return (
       <>
-        <input type='checkbox' defaultChecked={displayModal} id='clue-modal' className="modal-toggle" />
+        <input type='checkbox' defaultChecked={displayModal} checked={displayModal} id='clue-modal' className="modal-toggle" />
         <div className='modal'>
           <div className="modal-box w-11/12 max-w-5xl">
             <h1 className="text-3xl leading-loose m-5" ref={clueRef} onClick={readClue}>{description}</h1>
