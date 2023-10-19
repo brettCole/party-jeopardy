@@ -1,23 +1,24 @@
 import React from 'react';
 import { sql } from '@vercel/postgres';
-import  CategoryTitle, { ICategoryRow } from "../components/CategoryTitle";
-import CategoryClue, { Clue } from '../components/CategoryClue';
-import WelcomeHelp from "@/app/components/WelcomeHelp";
+import CategoryTitle, { Category } from "@/app/_components/clues/CategoryTitle";
+import CategoryClue, { Clue } from '@/app/_components/clues/CategoryClue';
+import WelcomeHelp from "@/app/_components/WelcomeHelp";
+import PlayersNameAndScore from "@/app/_components/players/PlayersNameAndScore";
 
-export default async function BibleJeopardy() {
+export default async function Page() {
+  const { rows:categories }: { rows:Category[] } = await sql`SELECT * FROM bible_categories`;
+  const { rows:clues }: { rows:Clue[] } = await sql`SELECT * FROM bible_clues`;
 
-  const { rows }: { rows:ICategoryRow[] } = await sql`SELECT * FROM bible_categories WHERE id BETWEEN 0 AND 6;`;
-  const clues: { rows:Clue[] } = await sql`SELECT * FROM bible_clues WHERE bible_category_id BETWEEN 1 AND 6`;
-  
   return (
     <>
-        <WelcomeHelp />
+      <WelcomeHelp />
       <header>
-        <CategoryTitle categoryRows={rows} />
+          <CategoryTitle categoryRows={categories} />
       </header>
       <main className="flex justify-center min-h-screen pt-4">
-        <CategoryClue clueRows={clues.rows} />
+          <CategoryClue clueRows={clues} />
       </main>
+      <PlayersNameAndScore />
     </>
   )
 }

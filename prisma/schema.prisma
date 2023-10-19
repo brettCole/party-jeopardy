@@ -1,6 +1,5 @@
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["jsonProtocol"]
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -11,10 +10,11 @@ datasource db {
 }
 
 model bible_categories {
-  title      String
-  created_at DateTime @default(now()) @map("created_at")
-  updated_at DateTime @updatedAt @map("updated_at")
-  id         Int      @id @default(autoincrement())
+  title       String
+  created_at  DateTime      @default(now()) @map("created_at")
+  updated_at  DateTime      @updatedAt @map("updated_at")
+  id          Int           @id @default(autoincrement())
+  bible_clues bible_clues[]
 }
 
 model bible_clues {
@@ -22,7 +22,8 @@ model bible_clues {
   answer            String
   point_value       Int
   bible_category_id Int
-  created_at        DateTime @default(now()) @map("created_at")
-  updated_at        DateTime @updatedAt @map("updated_at")
-  id                Int      @id @default(autoincrement())
+  categoryId        bible_categories @relation(fields: [bible_category_id], references: [id])
+  created_at        DateTime         @default(now()) @map("created_at")
+  updated_at        DateTime         @updatedAt @map("updated_at")
+  id                Int              @id @default(autoincrement())
 }
