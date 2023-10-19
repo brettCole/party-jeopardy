@@ -1,6 +1,8 @@
 import './globals.css'
 import { Inter, Michroma } from 'next/font/google'
 import Gyparody from 'next/font/local'
+import { ReactNode } from "react";
+import ReduxProvider from '@/appState/ReduxProvider';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,11 +24,15 @@ export const metadata = {
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: ReactNode
 }) {
   return (
     <html lang="en" className={`${inter.className} ${michroma.className} ${gyparody.variable}`}>
-      <body>{children}</body>
+      <body>
+        <ReduxProvider>
+          {children}
+        </ReduxProvider>
+      </body>
     </html>
   )
 }
