@@ -25,8 +25,7 @@ export default function Page() {
               data-tip="Play 3 rounds including Bible Jeopardy, Double, and Final Bible Jeopardy. Find out who the winner is each game."
             >
               <button className='block border border-jeopardyYellow p-4 font-gyparody text-5xl text-jeopardyYellow'>
-                {/* <Link href='/designateRoom'> */}
-                <Link href='/profile'>
+                <Link href='/api/auth'>
                   Bible Jeopardy
                 </Link>
               </button>
