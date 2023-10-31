@@ -10,6 +10,7 @@ export default function JeopardyHeader() {
         </Link>
       </h1>
       <nav>
+        {/* @ts-expect-error Server Component */}
         <UserMenu />
       </nav>
     </header>

@@ -1,5 +1,8 @@
-import NextAuth from "next-auth";
-import { NextAuthOptions } from "next-auth";
+import type { GetServerSidePropsContext, NextApiRequest, NextApiResponse } from "next";
+import type { NextAuthOptions } from "next-auth";
+import { getServerSession } from "next-auth";
+
+// import NextAuth from "next-auth";
 import Email from "next-auth/providers/email";
 import CredentialsProvider from "next-auth/providers/credentials";
 // import GoogleProvider from "next-auth/providers/google";
@@ -8,8 +11,11 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+// import this into `NextAuth` in 
+// `app/api/auth/[...nextauth]/route.ts
 export const authOptions: NextAuthOptions = {
   // TODO replace token in db with prisma on each successful sign in
+  // TODO set lifetime for token
   adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
@@ -17,7 +23,7 @@ export const authOptions: NextAuthOptions = {
         username: { label: "Username", type: "text", placeholder: 'jDoe' },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials:any, req) {  
+      async authorize(credentials:any, req) {
         console.log(credentials);
         console.log(req);
 
@@ -26,7 +32,7 @@ export const authOptions: NextAuthOptions = {
     }),
     Email({
       server: process.env.EMAIL_SERVER,
-      from: process.env.EMAIL_FROM,
+      from: process.env.EMAIL_FROM
     }),
     // GoogleProvider({
     //   clientId: 'testing',
@@ -53,7 +59,6 @@ export const authOptions: NextAuthOptions = {
       } else {
         return "/register";
       }
-      
     },
     async jwt({ token, account }) {
       console.log('token => ', token);
@@ -79,6 +84,12 @@ export const authOptions: NextAuthOptions = {
     async signIn(message:any) { console.log(message) }
   },
   debug: true,
-}
+  theme: {
+    buttonText: '#FFCC00',
+    
+  }
+} satisfies NextAuthOptions
 
-export const { handlers, auth, signIn, signOut } = NextAuth(authOptions);
+export function auth(...args: [GetServerSidePropsContext["req"], GetServerSidePropsContext["res"]] | [NextApiRequest, NextApiResponse] | []) {
+  return getServerSession(...args, authOptions) 
+}
